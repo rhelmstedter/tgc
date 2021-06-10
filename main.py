@@ -10,6 +10,7 @@ import turtle
 
 
 FILE_NAME = "AMTurtle"
+STUDENT_EMAIL = ""
 
 screen = turtle.Screen()
 screen.bgcolor("black")
@@ -35,11 +36,11 @@ PASSWORD = keyring.get_password("system", "venturaedu")
 # Setting up message
 message = MIMEMultipart('mixed')
 message['From'] = 'Contact <{sender}>'.format(sender = gmail)
-message['To'] = 'amaroly@venturaedu.org'
+message['To'] = STUDENT_EMAIL
 message['Subject'] = 'High Resolution Turtle Graphic'
 
 # Write the email
-msg_content = '<p>Hello,<br>Here is your spiral as a high resolutuon svg file. I hope you enjoy.<br><br>Mr. Helmstedter</p>\n'
+msg_content = '<p>Hello,<br>Here is your spiral as a high resolution svg file. I hope you enjoy.<br><br>Mr. Helmstedter</p>\n'
 body = MIMEText(msg_content, 'html')
 message.attach(body)
 
