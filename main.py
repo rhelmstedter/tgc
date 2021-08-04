@@ -1,4 +1,5 @@
 from background import draw_background
+from studentspiral import student_drawing
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart 
 from email.mime.text import MIMEText 
@@ -17,7 +18,7 @@ screen.bgcolor("#0E635E")
 turtle.speed(0)
 draw_background()
 
-import studentspiral
+student_drawing()
 
 turtle.ht()
 
