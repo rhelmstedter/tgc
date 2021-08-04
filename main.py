@@ -1,4 +1,4 @@
-from background import *
+from background import draw_background
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart 
 from email.mime.text import MIMEText 
@@ -9,11 +9,11 @@ import subprocess
 import turtle
 
 
-FILE_NAME = "AMTurtle"
+FILE_NAME = ""
 STUDENT_EMAIL = ""
 
 screen = turtle.Screen()
-screen.bgcolor("black")
+screen.bgcolor("#0E635E")
 turtle.speed(0)
 draw_background()
 
@@ -27,24 +27,24 @@ subprocess.run(["inkscape", f"--export-filename=images/{FILE_NAME}.svg", f"{FILE
 subprocess.run(["rm", f"{FILE_NAME}.eps"])
 subprocess.run(["inkscape", f"images/{FILE_NAME}.svg"])
 
-# Setting up credentials
+# Set up credentials
 smtp_server = 'smtp.gmail.com'
 smtp_port = 587
-gmail = 'russell.helmstedter@venturaedu.org'
+WORK_GMAIL = 'russell.helmstedter@venturaedu.org'
 PASSWORD = keyring.get_password("system", "venturaedu")
 
-# Setting up message
+# Set up message
 message = MIMEMultipart('mixed')
-message['From'] = 'Contact <{sender}>'.format(sender = gmail)
+message['From'] = f'Contact <{WORK_GMAIL}>'
 message['To'] = STUDENT_EMAIL
 message['Subject'] = 'High Resolution Turtle Graphic'
 
 # Write the email
-msg_content = '<p>Hello,<br>Here is your spiral as a high resolution svg file. I hope you enjoy.<br><br>Mr. Helmstedter</p>\n'
+msg_content = '<p>Hello,<br>Here is your drawing as a high resolution svg file. I hope you enjoy.<br><br>Mr. Helmstedter</p><br>'
 body = MIMEText(msg_content, 'html')
 message.attach(body)
 
-# Find the attachment
+# Find and attachment image
 attachmentPath = f"images/{FILE_NAME}.svg"
 try:
 	with open(attachmentPath, "rb") as attachment:
@@ -61,9 +61,8 @@ context = ssl.create_default_context()
 with smtplib.SMTP(smtp_server, smtp_port) as server:
 	server.ehlo()  
 	server.starttls(context=context)
-	server.ehlo()
-	server.login(gmail, PASSWORD)
-	server.sendmail(gmail, message['To'], msg_full)
+	server.login(WORK_GMAIL, PASSWORD)
+	server.sendmail(WORK_GMAIL, message['To'], msg_full)
 	server.quit()
 
 print("email sent out successfully")

@@ -1,15 +1,28 @@
 import turtle
 
+sides = 2
+distance = 100
 
-sides = 10
-distance = 0.1
-
-colors = ["white", "red", "white"]
-count = 0.01
-
-for _ in range(185*sides):
-    count += 0.0015
-    turtle.color(colors[int(count)])
-    distance += 0.1
-    turtle.forward(distance)
-    turtle.right(360 / sides + 1)
+for _ in range(100*sides):
+  turtle.color('white')
+  distance += 3
+  turtle.forward(distance)
+  turtle.right(360/sides+1)
+  
+for _ in range(100*sides):
+  turtle.color('Black')
+  distance += 3
+  turtle.forward(distance)
+  turtle.right(360/sides+1)
+  
+for _ in range(50*sides):
+  turtle.color('white')
+  distance += 3
+  turtle.forward(distance)
+  turtle.right(360/sides+1)
+  
+for _ in range(25*sides):
+  turtle.color('Black')
+  distance += 3
+  turtle.forward(distance)
+  turtle.right(360/sides+1)
